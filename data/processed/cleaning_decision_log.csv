@@ -1,0 +1,12 @@
+action,rows_affected,rows_removed,explanation
+Normalize store IDs in lookup,2,0,"Standardize FL239, FL_239, fl-239 to FL-239"
+Deduplicate store lookup,2,2,Keep first row for each canonical store ID
+Flag missing coordinates,1,0,Keep stores with missing coordinates; geocode separately for weather
+Drop exact duplicate transaction rows,30,30,Potential duplicate exports; confirm this policy if identical purchases may be legitimate
+Normalize transaction store IDs,4345,0,Match canonical IDs in store lookup
+Remove invalid/missing timestamps,884,884,Unusable for daily hurricane analysis
+Quarantine missing/invalid prices,0,0,"Do not silently convert missing, text, or negative unit prices to zero"
+Quarantine missing/zero quantities,0,0,No usable positive unit volume
+Separate negative quantities (possible returns),127,127,Exclude from gross demand; retain in separate returns CSV for review
+Quarantine store IDs missing from lookup,0,0,Prevent unmatched store weather joins
+Finish cleaned positive-demand transactions,24521,0,"25,562 raw rows -> 24,521 usable positive-demand rows"
